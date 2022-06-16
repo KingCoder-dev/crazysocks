@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h2>WASCO presents Crazy Socks</h2>
+    <p>Vote for who has the best crazy socks</p>
+    <button>Upload Socks</button>
+</div>
+<div class="container d-flex justify-content-between align-items-bewteen flex-wrap " style="margin: 1rem">
+    {% for obj in qs %}
+    <div class="card border border-primary text-center" style="width: 18rem" ;>
+
+        <img src="{{obj.image.url}} " alt="{{obj.name}} Socks">
+        <div class="card-body ">
+            <h1 class="card-title">{{obj.name}}</h1>
+
+            <form action="{%url 'polls:like-poll'%}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="poll_id" value="{{obj.id}}">
+                {%if user not in obj.liked.all%}
+                <button class="btn btn-light" type="submit">Like</button>
+                {%else%}
+                <button type="submit" class="btn btn-primary">Unlike</button>
+                {%endif%}
+            </form>
+            <strong>{{obj.liked.all.count}} Likes</strong>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}
