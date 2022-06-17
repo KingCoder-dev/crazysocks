@@ -1,13 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
+
+
+class IpModel(models.Model):
+    ip = models.CharField(max_length=100)
 
 
 class Polls (models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='uploads/')
-    liked = models.ManyToManyField(User, default=None, blank=True)
+    liked = models.ManyToManyField(
+        IpModel, default=None, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

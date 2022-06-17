@@ -5,7 +5,7 @@
 <div class="container">
     <h2>WASCO presents Crazy Socks</h2>
     <p>Vote for who has the best crazy socks</p>
-    <button>Upload Socks</button>
+    <a class="btn btn-primary" href="{% url 'polls:upload' %}">Upload Socks</a>
 </div>
 <div class="container d-flex justify-content-between align-items-bewteen flex-wrap " style="margin: 1rem">
     {% for obj in qs %}
@@ -18,7 +18,7 @@
             <form action="{%url 'polls:like-poll'%}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="poll_id" value="{{obj.id}}">
-                {%if user not in obj.liked.all%}
+                {%if ipmodel.ip.id not in obj.liked.all%}
                 <button class="btn btn-light" type="submit">Like</button>
                 {%else%}
                 <button type="submit" class="btn btn-primary">Unlike</button>

@@ -3,12 +3,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import polls_view, like_poll
+from .views import polls_view, like_poll, upload
 
 app_name = 'polls'
 urlpatterns = [
     path('', polls_view, name='poll-list'),
-    path("like/", like_poll, name="like-poll")
+    path("like/", like_poll, name="like-poll"),
+    path('upload/', upload, name='upload')
 ]
 
 
