@@ -2,23 +2,23 @@
 
 
 {% block content %}
-<div class="container">
-    <h2>WASCO presents Crazy Socks</h2>
+<div class="container text-center">
+    <h2>WASCO <br> presents Crazy Socks</h2>
     <p>Vote for who has the best crazy socks</p>
     <a class="btn btn-primary" href="{% url 'polls:upload' %}">Upload Socks</a>
 </div>
-<div class="container d-flex justify-content-between align-items-bewteen flex-wrap " style="margin: 1rem">
+<div class="container d-flex justify-content-between align-items-between flex-wrap " style="margin: 1rem">
     {% for obj in qs %}
     <div class="card border border-primary text-center" style="width: 18rem" ;>
 
-        <img src="{{obj.image.url}} " alt="{{obj.name}} Socks">
+        <img class="border-top" src="{{obj.image.url}} " alt="{{obj.name}} Socks">
         <div class="card-body ">
             <h1 class="card-title">{{obj.name}}</h1>
 
             <form action="{%url 'polls:like-poll'%}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="poll_id" value="{{obj.id}}">
-                {%if ipmodel.ip.id not in obj.liked.all%}
+                {%if ipmodel not in obj.liked.all%}
                 <button class="btn btn-light" type="submit">Like</button>
                 {%else%}
                 <button type="submit" class="btn btn-primary">Unlike</button>
